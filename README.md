@@ -4,7 +4,7 @@
 
 ---
 
-##### 前情
+### 前情
 最近一直在研究侧滑返回效果的实现，目前比较多的方案如下：
 
  1. 背景透明主题。问题是性能与神坑"Only fullscreen activities can request
@@ -14,12 +14,12 @@
 
 本库这里选择了方案3。
 
-#### 预览
+### 预览
 ![即刻App](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/jike.gif)
 ![本库](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/mine.gif)
 [Demo下载](https://github.com/ParfoisMeng/SlideBack/blob/master/demo/demo.apk)
 
-#### 使用
+### 使用
 [![](https://jitpack.io/v/ParfoisMeng/SlideBack.svg)](https://jitpack.io/#ParfoisMeng/SlideBack)
  - 引用类库 *请将last-version替换为最新版本号
 ```
@@ -58,13 +58,13 @@ class SecondActivity : AppCompatActivity() {
 ```
 OJBK！So easy！
 
-#### 性能
+### 性能
 附一张性能截图。可以看出来中间进行了很多次 onCreate & onDestory，最后内存和开始时一致：
 ![
 MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.png)
 
-#### 感谢
+### 感谢
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
 
-#### 支持
+### 支持
 <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="320px"/>  <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="320px"/>
