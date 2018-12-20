@@ -68,4 +68,4 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.p
 
 #### 支持
 <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="420px"/>
-<img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.jpg" width="420px"/>
+<img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="420px"/>
