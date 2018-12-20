@@ -1,7 +1,6 @@
 package com.parfoismeng.slideback;
 
 import android.app.Application;
-import com.parfoismeng.slidebacklib.SlideBack;
 
 /**
  * author : ParfoisMeng
@@ -12,7 +11,5 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
-//        SlideBack.getInstance().init(this);
     }
 }
