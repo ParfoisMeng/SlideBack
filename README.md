@@ -67,5 +67,4 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.p
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
 
 #### 支持
-<img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="420px"/>
-<img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="420px"/>
+<img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="320px"/><img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="320px"/>
