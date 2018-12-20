@@ -42,7 +42,7 @@ class SecondActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // 在需要滑动返回的Activity中注册
-        SlideBackUtils.register(this) {
+        SlideBack.register(this) {
             Toast.makeText(this, "SlideBack", Toast.LENGTH_SHORT).show()
         }
     }
@@ -50,9 +50,9 @@ class SecondActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
 
-        // onDestory时记得解绑
+        // onDestroy时记得解绑
         // 内部使用WeakHashMap，理论上不解绑也行，但最好还是手动解绑一下
-        SlideBackUtils.unregister(this)
+        SlideBack.unregister(this)
     }
 }
 ```

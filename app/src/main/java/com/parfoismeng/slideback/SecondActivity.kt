@@ -3,7 +3,7 @@ package com.parfoismeng.slideback
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
-import com.parfoismeng.slidebacklib.SlideBackUtils
+import com.parfoismeng.slidebacklib.SlideBack
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -18,13 +18,13 @@ class SecondActivity : AppCompatActivity() {
 
         textView.text = "SecondActivity"
 
-        SlideBackUtils.register(this) {
+        SlideBack.register(this) {
             Toast.makeText(this, "SlideBack", Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        SlideBackUtils.unregister(this)
+        SlideBack.unregister(this)
     }
 }
