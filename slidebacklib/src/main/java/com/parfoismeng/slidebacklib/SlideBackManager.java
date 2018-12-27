@@ -7,6 +7,7 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
 import com.parfoismeng.slidebacklib.widget.SlideBackIconView;
 
 /**
@@ -106,9 +107,5 @@ class SlideBackManager {
 
     private float dp2px(float dpValue) {
         return dpValue * activity.getResources().getDisplayMetrics().density + 0.5f;
-    }
-
-    public interface SlideBackCallBack {
-        void onSlideBack();
     }
 }
