@@ -89,19 +89,22 @@ OJBK！So easy！
 ![
 MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.png)
 
+### 分析
+源码分析MD：[Analysis.md](https://github.com/ParfoisMeng/SlideBack/blob/master/Analysis.md)
+
 ### 感谢
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
 
 ### 更新
-1. 删除无用依赖，添加Java引用示例 - 1.0.2
-2. 检查警告，修改类名，更新README.md - 1.0.1
-3. 初版发布 - 1.0.0
+1. 添加大量注释 & 源码分析MD - 未更新版本
+2. 删除无用依赖，添加Java引用示例 - 1.0.2
+3. 检查警告，修改类名，更新README.md - 1.0.1
+4. 初版发布 - 1.0.0
 
 ### 计划
 1. 目前还是依赖了v7包，作用仅为@ColorInt和@Nullable约束，要不要保留呢？
 2. 提交个Kotlin版本（其实AS直接转换就行...）
-3. 写个源码分析（一共也就不到200行代码，看看就差不多了吧...）
-4. 看情况吧......
+3. 看情况吧......
 
 ### 支持
 劳烦各位大佬给个Star让我出去好装B行嘛！

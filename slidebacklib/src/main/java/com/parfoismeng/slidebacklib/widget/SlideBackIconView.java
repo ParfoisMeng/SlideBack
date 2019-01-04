@@ -16,10 +16,10 @@ import android.view.View;
  * desc   : 边缘返回的图标View
  */
 public class SlideBackIconView extends View {
-    private Path bgPath, arrowPath;
-    private Paint bgPaint, arrowPaint;
+    private Path bgPath, arrowPath; // 路径对象
+    private Paint bgPaint, arrowPaint; // 画笔对象
 
-    private float slideLength = 0; // 拉动距离
+    private float slideLength = 0; // 当前拉动距离
     private float maxSlideLength = 0; // 最大拉动距离
 
     private float arrowSize = 10; // 箭头图标大小
@@ -27,7 +27,7 @@ public class SlideBackIconView extends View {
     @ColorInt
     private int backViewColor = Color.BLACK; // 默认值
 
-    private float backViewHeight = 0;
+    private float backViewHeight = 0; // 控件高度
 
     public SlideBackIconView(Context context) {
         this(context, null);
@@ -43,7 +43,7 @@ public class SlideBackIconView extends View {
     }
 
     /**
-     * 初始化
+     * 初始化 路径与画笔
      * Path & Paint
      */
     private void init() {
@@ -52,35 +52,49 @@ public class SlideBackIconView extends View {
 
         bgPaint = new Paint();
         bgPaint.setAntiAlias(true);
-        bgPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        bgPaint.setStyle(Paint.Style.FILL_AND_STROKE); // 填充内部和描边
         bgPaint.setColor(backViewColor);
-        bgPaint.setStrokeWidth(1);
+        bgPaint.setStrokeWidth(1); // 画笔宽度
 
         arrowPaint = new Paint();
         arrowPaint.setAntiAlias(true);
-        arrowPaint.setStyle(Paint.Style.STROKE);
+        arrowPaint.setStyle(Paint.Style.STROKE); // 描边
         arrowPaint.setColor(Color.WHITE);
-        arrowPaint.setStrokeWidth(8);
-        arrowPaint.setStrokeJoin(Paint.Join.ROUND);
+        arrowPaint.setStrokeWidth(8); // 画笔宽度
+        arrowPaint.setStrokeJoin(Paint.Join.ROUND); // * 结合处的样子 ROUND:圆弧
 
         setAlpha(0);
     }
 
+    /**
+     * 因为过程中会多次绘制，所以要先重置路径再绘制。
+     * 贝塞尔曲线没什么好说的，相关文章有很多。此曲线经我测试比较类似“即刻App”。
+     *
+     * 方便阅读再写一遍，此段代码中的变量定义：
+     * backViewHeight   控件高度
+     * slideLength      当前拉动距离
+     * maxSlideLength   最大拉动距离
+     * arrowSize        箭头图标大小
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         // 背景
-        bgPath.reset();
+        bgPath.reset(); // 会多次绘制，所以先重置
         bgPath.moveTo(0, 0);
         bgPath.cubicTo(0, backViewHeight * 2 / 9, slideLength, backViewHeight / 3, slideLength, backViewHeight / 2);
         bgPath.cubicTo(slideLength, backViewHeight * 2 / 3, 0, backViewHeight * 7 / 9, 0, backViewHeight);
-        canvas.drawPath(bgPath, bgPaint);
+        canvas.drawPath(bgPath, bgPaint); // 根据设置的贝塞尔曲线路径用画笔绘制
 
-        // 箭头
+        // 箭头是先直线由短变长再折弯变成箭头状的
+        // 依据当前拉动距离和最大拉动距离计算箭头大小值
+        // 大小到一定值后开始折弯，计算箭头角度值
         float arrowZoom = slideLength / maxSlideLength; // 箭头大小变化率
         float arrowAngle = arrowZoom < 0.75f ? 0 : (arrowZoom - 0.75f) * 2; // 箭头角度变化率
-        arrowPath.reset();
+        // 箭头
+        arrowPath.reset(); // 先重置
+        // 结合箭头大小值与箭头角度值设置折线路径
         arrowPath.moveTo(slideLength / 2 + (arrowSize * arrowAngle), backViewHeight / 2 - (arrowZoom * arrowSize));
         arrowPath.lineTo(slideLength / 2 - (arrowSize * arrowAngle), backViewHeight / 2);
         arrowPath.lineTo(slideLength / 2 + (arrowSize * arrowAngle), backViewHeight / 2 + (arrowZoom * arrowSize));
@@ -89,9 +103,13 @@ public class SlideBackIconView extends View {
         setAlpha(slideLength / maxSlideLength - 0.2f); // 最多0.8透明度
     }
 
+    /**
+     * 更新当前拉动距离并重绘
+     * @param slideLength 当前拉动距离
+     */
     public void updateSlideLength(float slideLength) {
         this.slideLength = slideLength;
-        invalidate();
+        invalidate(); // 会再次调用onDraw
     }
 
     /**

@@ -38,46 +38,52 @@ class SlideBackManager {
         float screenWidth = dm.widthPixels;
         float screenHeight = dm.heightPixels;
 
-        maxSlideLength = screenWidth / 12;
+        maxSlideLength = screenWidth / 12; // 这里我设置为 屏宽/12
 
+        // 初始化SlideBackIconView
         slideBackIconView = new SlideBackIconView(activity);
         slideBackIconView.setBackViewColor(Color.BLACK);
         slideBackIconView.setBackViewHeight(screenHeight / 4);
         slideBackIconView.setArrowSize(dp2px(5));
         slideBackIconView.setMaxSlideLength(maxSlideLength);
 
+        // 获取decorView并设置OnTouchListener监听
         FrameLayout container = (FrameLayout) activity.getWindow().getDecorView();
         container.addView(slideBackIconView);
         container.setOnTouchListener(new View.OnTouchListener() {
-            private boolean isSideSlide = false;
-            private float downX = 0;
+            private boolean isSideSlide = false;  // 是否从边缘开始滑动
+            private float downX = 0; // 按下的X轴坐标
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        downX = event.getRawX();
-                        if (downX <= maxSlideLength) {
+                    case MotionEvent.ACTION_DOWN: // 按下
+                        downX = event.getRawX(); // 更新按下点的X轴坐标
+                        if (downX <= maxSlideLength) { // 检验是否从边缘开始滑动
                             isSideSlide = true;
                         }
                         break;
-                    case MotionEvent.ACTION_MOVE:
-                        if (isSideSlide) {
-                            float moveX = event.getRawX() - downX;
+                    case MotionEvent.ACTION_MOVE: // 移动
+                        if (isSideSlide) { // 是从边缘开始滑动
+                            float moveX = event.getRawX() - downX; // 获取X轴位移距离
                             if (Math.abs(moveX) <= maxSlideLength * 4) {
+                                // 如果位移距离在可拉动距离内，更新SlideBackIconView的当前拉动距离并重绘
                                 slideBackIconView.updateSlideLength(Math.abs(moveX) / 4);
                             }
+                            // 根据Y轴位置给SlideBackIconView定位
                             setSlideBackPosition(slideBackIconView, (int) (event.getRawY()));
                         }
                         break;
-                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_UP: // 抬起
+                        // 是从边缘开始滑动 且 抬起点的X轴坐标大于某值(4倍最大滑动长度)
                         if (isSideSlide && event.getRawX() >= maxSlideLength * 4) {
                             if (null != SlideBackManager.this.callBack) {
+                                // 不为空则响应回调事件
                                 SlideBackManager.this.callBack.onSlideBack();
                             }
                         }
-                        isSideSlide = false;
-                        slideBackIconView.updateSlideLength(0);
+                        isSideSlide = false; // 从边缘开始滑动结束
+                        slideBackIconView.updateSlideLength(0); // 恢复0
                         break;
                 }
                 return isSideSlide;
@@ -98,7 +104,14 @@ class SlideBackManager {
         slideBackIconView = null;
     }
 
+    /**
+     * 给SlideBackIconView设置topMargin，起到定位效果
+     *
+     * @param view     SlideBackIconView
+     * @param position 触点位置
+     */
     private void setSlideBackPosition(SlideBackIconView view, int position) {
+        // 触点位置减去SlideBackIconView一半高度即为topMargin
         int topMargin = (int) (position - (view.getBackViewHeight() / 2));
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(view.getLayoutParams());
         layoutParams.topMargin = topMargin;
