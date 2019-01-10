@@ -13,15 +13,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        textView.apply {
-            text = "MainActivity"
-            setOnClickListener {
-                startActivity(Intent(this@MainActivity, SecondActivity::class.java))
-            }
-        }
-
         SlideBack.register(this) {
             Toast.makeText(this, "SlideBack", Toast.LENGTH_SHORT).show()
+        }
+
+        textView1.setOnClickListener {
+            startActivity(Intent(this@MainActivity, SecondActivity::class.java))
+        }
+        textView2.setOnClickListener {
+            startActivity(Intent(this@MainActivity, ScrollActivity::class.java))
         }
     }
 

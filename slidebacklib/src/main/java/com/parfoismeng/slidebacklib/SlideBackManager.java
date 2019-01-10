@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
 import com.parfoismeng.slidebacklib.widget.SlideBackIconView;
+import com.parfoismeng.slidebacklib.widget.SlideBackInterceptLayout;
 
 /**
  * author : ParfoisMeng
@@ -26,11 +28,12 @@ class SlideBackManager {
     /**
      * 需要使用滑动的页面注册
      *
-     * @param activity 页面Act
-     * @param callBack 回调
+     * @param activity   页面Act
+     * @param haveScroll 页面是否有滑动
+     * @param callBack   回调
      */
     @SuppressLint("ClickableViewAccessibility")
-    SlideBackManager register(Activity activity, SlideBackCallBack callBack) {
+    SlideBackManager register(Activity activity, boolean haveScroll, SlideBackCallBack callBack) {
         this.activity = activity;
         this.callBack = callBack;
 
@@ -49,6 +52,11 @@ class SlideBackManager {
 
         // 获取decorView并设置OnTouchListener监听
         FrameLayout container = (FrameLayout) activity.getWindow().getDecorView();
+        if (haveScroll) {
+            SlideBackInterceptLayout interceptLayout = new SlideBackInterceptLayout(activity);
+            interceptLayout.setSideSlideLength(maxSlideLength / 2);
+            addInterceptLayout(container, interceptLayout);
+        }
         container.addView(slideBackIconView);
         container.setOnTouchListener(new View.OnTouchListener() {
             private boolean isSideSlide = false;  // 是否从边缘开始滑动
@@ -59,7 +67,7 @@ class SlideBackManager {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: // 按下
                         downX = event.getRawX(); // 更新按下点的X轴坐标
-                        if (downX <= maxSlideLength) { // 检验是否从边缘开始滑动
+                        if (downX <= maxSlideLength / 2) { // 检验是否从边缘开始滑动
                             isSideSlide = true;
                         }
                         break;
@@ -102,6 +110,17 @@ class SlideBackManager {
         callBack = null;
         maxSlideLength = 0;
         slideBackIconView = null;
+    }
+
+    /**
+     * 给根布局包上一层事件拦截处理Layout
+     */
+    private void addInterceptLayout(ViewGroup decorView, SlideBackInterceptLayout interceptLayout) {
+        View rootLayout = decorView.getChildAt(0); // 取出根布局
+        decorView.removeView(rootLayout); // 先移除根布局
+        // 用事件拦截处理Layout将原根布局包起来，再添加回去
+        interceptLayout.addView(rootLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        decorView.addView(interceptLayout);
     }
 
     /**

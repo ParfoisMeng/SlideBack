@@ -3,8 +3,8 @@ package com.parfoismeng.slideback;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.parfoismeng.slidebacklib.SlideBack;
 import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
 
@@ -19,16 +19,16 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView textView = findViewById(R.id.textView);
-        textView.setText("SecondActivity");
-
         SlideBack.register(this, new SlideBackCallBack() {
             @Override
             public void onSlideBack() {
                 finish();
-                Toast.makeText(SecondActivity.this, "SlideBack", Toast.LENGTH_SHORT).show();
             }
         });
+
+        TextView textView = findViewById(R.id.textView1);
+        textView.setText("SecondActivity");
+        findViewById(R.id.textView2).setVisibility(View.GONE);
     }
 
     @Override

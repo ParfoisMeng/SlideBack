@@ -21,7 +21,18 @@ public class SlideBack {
      * @param callBack 回调
      */
     public static void register(Activity activity, SlideBackCallBack callBack) {
-        map.put(activity, new SlideBackManager().register(activity, callBack));
+        register(activity, false, callBack);
+    }
+
+    /**
+     * 注册
+     *
+     * @param activity   目标Act
+     * @param haveScroll 页面是否有滑动
+     * @param callBack   回调
+     */
+    public static void register(Activity activity, boolean haveScroll, SlideBackCallBack callBack) {
+        map.put(activity, new SlideBackManager().register(activity, haveScroll, callBack));
     }
 
     /**

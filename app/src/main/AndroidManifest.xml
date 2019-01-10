@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SecondActivity"/>
+        <activity android:name=".ScrollActivity"/>
     </application>
 
 </manifest>
