@@ -16,9 +16,9 @@
 本库这里选择了方案3。
 
 ### 预览
-![即刻App](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/jike.gif)
-![本库](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/mine.gif)
-[Demo下载](https://github.com/ParfoisMeng/SlideBack/blob/master/demo/demo.apk)
+| 即刻App | 本库 | Demo下载 |
+| --- | --- | --- |
+| ![即刻App](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/jike.gif) | ![本库](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/mine.gif) | ![Demo QR](https://github.com/ParfoisMeng/SlideBack/blob/master/demo/demo_qr.gif)<br>[Demo下载](https://raw.githubusercontent.com/ParfoisMeng/SlideBack/master/demo/demo.apk) |
 
 ### 使用
  - 引用类库 *请将last-version替换为最新版本号 [![](https://jitpack.io/v/ParfoisMeng/SlideBack.svg)](https://jitpack.io/#ParfoisMeng/SlideBack)
@@ -120,4 +120,14 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.p
 ### 支持
 劳烦各位大佬给个Star让我出去好装B行嘛！
 
-<img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="280px"/>  <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="280px"/>
+### 其他
+- 加我好友（请注明来意）
+
+| QQ | WeChat | Email |
+| --- | --- | --- |
+| ![757479544](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/qq_qr.jpg)<br>757479544 | ![youshi520000](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wx_qr.png)<br>youshi520000 | youshi.meng@gmail.com<br>youshi520000@163.com<br>yi520000@vip.qq.com |
+- 赏杯咖啡
+
+| Alipay | WeChat Pay |
+| --- | --- |
+| <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="280px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="280px"/> |
