@@ -17,8 +17,8 @@
 
 ### 预览
 | 即刻App | 本库 | Demo下载 |
-| --- | --- | --- |
-| ![即刻App](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/jike.gif) | ![本库](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/mine.gif) | ![Demo QR](https://github.com/ParfoisMeng/SlideBack/blob/master/demo/demo_qr.gif)<br>[Demo下载](https://raw.githubusercontent.com/ParfoisMeng/SlideBack/master/demo/demo.apk) |
+| :---: | :---: | :---: |
+| <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/jike.gif" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/mine.gif" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/demo/demo_qr.gif" width="260px"/><br><br>[Demo下载](https://raw.githubusercontent.com/ParfoisMeng/SlideBack/master/demo/demo.apk) |
 
 ### 使用
  - 引用类库 *请将last-version替换为最新版本号 [![](https://jitpack.io/v/ParfoisMeng/SlideBack.svg)](https://jitpack.io/#ParfoisMeng/SlideBack)
@@ -124,10 +124,10 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.p
 - 加我好友（请注明来意）
 
 | QQ | WeChat | Email |
-| --- | --- | --- |
-| ![757479544](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/qq_qr.jpg)<br>757479544 | ![youshi520000](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wx_qr.png)<br>youshi520000 | youshi.meng@gmail.com<br>youshi520000@163.com<br>yi520000@vip.qq.com |
+| :---: | :---: | :---: |
+| 757479544<br><br><img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/qq_qr.jpg" width="260px"/> | youshi520000<br><br><img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wx_qr.png" width="260px"/> | youshi520000@163.com<br><br>yi520000@vip.qq.com<br><br>youshi.meng@gmail.com<br><br>parfois.meng@icloud.com<br><br>parfois.meng@outlook.com |
 - 赏杯咖啡
 
 | Alipay | WeChat Pay |
 | --- | --- |
-| <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="280px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="280px"/> |
+| <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="260px"/> |
