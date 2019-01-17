@@ -121,11 +121,13 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.p
 劳烦各位大佬给个Star让我出去好装B行嘛！
 
 ### 其他
+<!--
 - 加我好友（请注明来意）
 
 | QQ | WeChat | Email |
 | :---: | :---: | :---: |
 | 757479544<br><br><img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/qq_qr.jpg" width="260px"/> | youshi520000<br><br><img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wx_qr.png" width="260px"/> | youshi520000@163.com<br><br>yi520000@vip.qq.com<br><br>youshi.meng@gmail.com<br><br>parfois.meng@icloud.com<br><br>parfois.meng@outlook.com |
+-->
 - 赏杯咖啡
 
 | Alipay | WeChat Pay |
