@@ -32,7 +32,7 @@ public class SlideBack {
      * @param callBack   回调
      */
     public static void register(Activity activity, boolean haveScroll, SlideBackCallBack callBack) {
-        map.put(activity, new SlideBackManager().register(activity, haveScroll, callBack));
+        with(activity).haveScroll(haveScroll).callBack(callBack).register();
     }
 
     /**
@@ -47,4 +47,17 @@ public class SlideBack {
         }
         map.remove(activity);
     }
+
+    /**
+     * 构建侧滑管理器 - 用于更丰富的自定义配置
+     *
+     * @param activity 目标Act
+     * @return 构建管理器
+     */
+    public static SlideBackManager with(Activity activity) {
+        SlideBackManager manager = new SlideBackManager(activity);
+        map.put(activity, manager);
+        return manager;
+    }
+
 }

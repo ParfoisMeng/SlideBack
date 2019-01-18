@@ -19,15 +19,13 @@ public class SlideBackIconView extends View {
     private Path bgPath, arrowPath; // 路径对象
     private Paint bgPaint, arrowPaint; // 画笔对象
 
-    private float slideLength = 0; // 当前拉动距离
-    private float maxSlideLength = 0; // 最大拉动距离
-
-    private float arrowSize = 10; // 箭头图标大小
-
     @ColorInt
     private int backViewColor = Color.BLACK; // 默认值
-
     private float backViewHeight = 0; // 控件高度
+    private float arrowSize = 10; // 箭头图标大小
+    private float maxSlideLength = 0; // 最大拉动距离
+
+    private float slideLength = 0; // 当前拉动距离
 
     public SlideBackIconView(Context context) {
         this(context, null);
@@ -69,7 +67,7 @@ public class SlideBackIconView extends View {
     /**
      * 因为过程中会多次绘制，所以要先重置路径再绘制。
      * 贝塞尔曲线没什么好说的，相关文章有很多。此曲线经我测试比较类似“即刻App”。
-     *
+     * <p>
      * 方便阅读再写一遍，此段代码中的变量定义：
      * backViewHeight   控件高度
      * slideLength      当前拉动距离
@@ -105,6 +103,7 @@ public class SlideBackIconView extends View {
 
     /**
      * 更新当前拉动距离并重绘
+     *
      * @param slideLength 当前拉动距离
      */
     public void updateSlideLength(float slideLength) {

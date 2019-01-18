@@ -2,7 +2,6 @@ package com.parfoismeng.slidebacklib;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,44 +16,110 @@ import com.parfoismeng.slidebacklib.widget.SlideBackInterceptLayout;
  * time   : 2018/12/19
  * desc   : SlideBack管理器
  */
-class SlideBackManager {
-    private Activity activity;
-    private SlideBackCallBack callBack;
-
-    private float maxSlideLength;
-
+public class SlideBackManager {
     private SlideBackIconView slideBackIconView;
 
-    /**
-     * 需要使用滑动的页面注册
-     *
-     * @param activity   页面Act
-     * @param haveScroll 页面是否有滑动
-     * @param callBack   回调
-     */
-    @SuppressLint("ClickableViewAccessibility")
-    SlideBackManager register(Activity activity, boolean haveScroll, SlideBackCallBack callBack) {
-        this.activity = activity;
-        this.callBack = callBack;
+    private Activity activity;
+    private boolean haveScroll;
 
+    private SlideBackCallBack callBack;
+
+    private float backViewHeight; // 控件高度
+    private float arrowSize; // 箭头图标大小
+    private float maxSlideLength; // 最大拉动距离
+
+    private float sideSlideLength; // 侧滑响应距离
+    private float dragRate; // 阻尼系数
+
+    SlideBackManager(Activity activity) {
+        this.activity = activity;
+        haveScroll = false;
+
+        // 获取屏幕信息，初始化控件设置
         DisplayMetrics dm = activity.getResources().getDisplayMetrics();
         float screenWidth = dm.widthPixels;
         float screenHeight = dm.heightPixels;
 
-        maxSlideLength = screenWidth / 12; // 这里我设置为 屏宽/12
+        backViewHeight = screenHeight / 4; // 高度默认 屏高/4
+        arrowSize = dp2px(5); // 箭头大小默认 5dp
+        maxSlideLength = screenWidth / 12; // 最大宽度默认 屏宽/12
 
+        sideSlideLength = maxSlideLength / 2; // 侧滑响应距离默认 控件最大宽度/2
+        dragRate = 3; // 阻尼系数默认 3
+    }
+
+    /**
+     * 是否包含滑动控件 默认false
+     */
+    public SlideBackManager haveScroll(boolean haveScroll) {
+        this.haveScroll = haveScroll;
+        return this;
+    }
+
+    /**
+     * 回调
+     */
+    public SlideBackManager callBack(SlideBackCallBack callBack) {
+        this.callBack = callBack;
+        return this;
+    }
+
+    /**
+     * 控件高度 默认屏高/4
+     */
+    public SlideBackManager viewHeight(float backViewHeightDP) {
+        this.backViewHeight = dp2px(backViewHeightDP);
+        return this;
+    }
+
+    /**
+     * 箭头大小 默认5dp
+     */
+    public SlideBackManager arrowSize(float arrowSizeDP) {
+        this.arrowSize = dp2px(arrowSizeDP);
+        return this;
+    }
+
+    /**
+     * 最大拉动距离（控件最大宽度） 默认屏宽/12
+     */
+    public SlideBackManager maxSlideLength(float maxSlideLengthDP) {
+        this.maxSlideLength = dp2px(maxSlideLengthDP);
+        return this;
+    }
+
+    /**
+     * 侧滑响应距离 默认控件最大宽度/2
+     */
+    public SlideBackManager sideSlideLength(float sideSlideLengthDP) {
+        this.sideSlideLength = dp2px(sideSlideLengthDP);
+        return this;
+    }
+
+    /**
+     * 阻尼系数 默认3（越小越灵敏）
+     */
+    public SlideBackManager dragRate(float dragRate) {
+        this.dragRate = dragRate;
+        return this;
+    }
+
+    /**
+     * 需要使用滑动的页面注册
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    public void register() {
         // 初始化SlideBackIconView
         slideBackIconView = new SlideBackIconView(activity);
-        slideBackIconView.setBackViewColor(Color.BLACK);
-        slideBackIconView.setBackViewHeight(screenHeight / 4);
-        slideBackIconView.setArrowSize(dp2px(5));
+        slideBackIconView.setBackViewHeight(backViewHeight);
+        slideBackIconView.setArrowSize(arrowSize);
         slideBackIconView.setMaxSlideLength(maxSlideLength);
 
         // 获取decorView并设置OnTouchListener监听
         FrameLayout container = (FrameLayout) activity.getWindow().getDecorView();
         if (haveScroll) {
             SlideBackInterceptLayout interceptLayout = new SlideBackInterceptLayout(activity);
-            interceptLayout.setSideSlideLength(maxSlideLength / 2);
+            interceptLayout.setSideSlideLength(sideSlideLength);
             addInterceptLayout(container, interceptLayout);
         }
         container.addView(slideBackIconView);
@@ -67,24 +132,24 @@ class SlideBackManager {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN: // 按下
                         downX = event.getRawX(); // 更新按下点的X轴坐标
-                        if (downX <= maxSlideLength / 2) { // 检验是否从边缘开始滑动
+                        if (downX <= sideSlideLength) { // 检验是否从边缘开始滑动
                             isSideSlide = true;
                         }
                         break;
                     case MotionEvent.ACTION_MOVE: // 移动
                         if (isSideSlide) { // 是从边缘开始滑动
                             float moveX = event.getRawX() - downX; // 获取X轴位移距离
-                            if (Math.abs(moveX) <= maxSlideLength * 4) {
+                            if (Math.abs(moveX) <= maxSlideLength * dragRate) {
                                 // 如果位移距离在可拉动距离内，更新SlideBackIconView的当前拉动距离并重绘
-                                slideBackIconView.updateSlideLength(Math.abs(moveX) / 4);
+                                slideBackIconView.updateSlideLength(Math.abs(moveX) / dragRate);
                             }
                             // 根据Y轴位置给SlideBackIconView定位
                             setSlideBackPosition(slideBackIconView, (int) (event.getRawY()));
                         }
                         break;
                     case MotionEvent.ACTION_UP: // 抬起
-                        // 是从边缘开始滑动 且 抬起点的X轴坐标大于某值(4倍最大滑动长度)
-                        if (isSideSlide && event.getRawX() >= maxSlideLength * 4) {
+                        // 是从边缘开始滑动 且 抬起点的X轴坐标大于某值(默认3倍最大滑动长度)
+                        if (isSideSlide && event.getRawX() >= maxSlideLength * dragRate) {
                             if (null != SlideBackManager.this.callBack) {
                                 // 不为空则响应回调事件
                                 SlideBackManager.this.callBack.onSlideBack();
@@ -97,18 +162,21 @@ class SlideBackManager {
                 return isSideSlide;
             }
         });
-
-        return this;
     }
 
     /**
      * 页面销毁时记得解绑
      * 其实就是置空防止内存泄漏
      */
+    @SuppressLint("ClickableViewAccessibility")
     void unregister() {
+//        FrameLayout container = (FrameLayout) activity.getWindow().getDecorView();
+//        if (haveScroll) removeInterceptLayout(container);
+//        container.removeView(slideBackIconView);
+//        container.setOnTouchListener(null);
+
         activity = null;
         callBack = null;
-        maxSlideLength = 0;
         slideBackIconView = null;
     }
 
@@ -121,6 +189,18 @@ class SlideBackManager {
         // 用事件拦截处理Layout将原根布局包起来，再添加回去
         interceptLayout.addView(rootLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         decorView.addView(interceptLayout);
+    }
+
+    /**
+     * 将根布局还原，移除SlideBackInterceptLayout
+     */
+    private void removeInterceptLayout(ViewGroup decorView) {
+        FrameLayout rootLayout = (FrameLayout) decorView.getChildAt(0); // 取出根布局
+        decorView.removeView(rootLayout); // 先移除根布局
+        // 将根布局的第一个布局(原根布局)取出放回decorView
+        View oriLayout = rootLayout.getChildAt(0);
+        rootLayout.removeView(oriLayout);
+        decorView.addView(oriLayout);
     }
 
     /**
