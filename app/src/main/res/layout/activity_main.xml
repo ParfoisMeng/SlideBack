@@ -9,6 +9,7 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="To SecondActivity"
             android:padding="20dp"/>
 
@@ -17,5 +18,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="To ScrollActivity"
+            android:gravity="center"
             android:padding="20dp"/>
 </LinearLayout>

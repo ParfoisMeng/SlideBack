@@ -1,6 +1,7 @@
 package com.parfoismeng.slideback;
 
 import android.app.Application;
+import com.squareup.leakcanary.LeakCanary;
 
 /**
  * author : ParfoisMeng
@@ -11,5 +12,9 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        if (!LeakCanary.isInAnalyzerProcess(this)) {
+            LeakCanary.install(this);
+        }
     }
 }

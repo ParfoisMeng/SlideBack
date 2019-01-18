@@ -11,6 +11,9 @@ import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
 import com.parfoismeng.slidebacklib.widget.SlideBackIconView;
 import com.parfoismeng.slidebacklib.widget.SlideBackInterceptLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * author : ParfoisMeng
  * time   : 2018/12/19
@@ -170,10 +173,10 @@ public class SlideBackManager {
      */
     @SuppressLint("ClickableViewAccessibility")
     void unregister() {
-//        FrameLayout container = (FrameLayout) activity.getWindow().getDecorView();
-//        if (haveScroll) removeInterceptLayout(container);
-//        container.removeView(slideBackIconView);
-//        container.setOnTouchListener(null);
+        FrameLayout container = (FrameLayout) activity.getWindow().getDecorView();
+        if (haveScroll) removeInterceptLayout(container);
+        container.removeView(slideBackIconView);
+        container.setOnTouchListener(null);
 
         activity = null;
         callBack = null;
@@ -184,10 +187,16 @@ public class SlideBackManager {
      * 给根布局包上一层事件拦截处理Layout
      */
     private void addInterceptLayout(ViewGroup decorView, SlideBackInterceptLayout interceptLayout) {
-        View rootLayout = decorView.getChildAt(0); // 取出根布局
-        decorView.removeView(rootLayout); // 先移除根布局
-        // 用事件拦截处理Layout将原根布局包起来，再添加回去
-        interceptLayout.addView(rootLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        // 取出根布局
+        List<View> rootLayouts = new ArrayList<>();
+        for (int i = 0, count = decorView.getChildCount(); i < count; i++) {
+            rootLayouts.add(decorView.getChildAt(i));
+        }
+        for (View rootLayout : rootLayouts) {
+            decorView.removeView(rootLayout); // 先移除根布局
+            // 用事件拦截处理Layout将原根布局包起来，再添加回去
+            interceptLayout.addView(rootLayout);
+        }
         decorView.addView(interceptLayout);
     }
 
@@ -197,10 +206,15 @@ public class SlideBackManager {
     private void removeInterceptLayout(ViewGroup decorView) {
         FrameLayout rootLayout = (FrameLayout) decorView.getChildAt(0); // 取出根布局
         decorView.removeView(rootLayout); // 先移除根布局
-        // 将根布局的第一个布局(原根布局)取出放回decorView
-        View oriLayout = rootLayout.getChildAt(0);
-        rootLayout.removeView(oriLayout);
-        decorView.addView(oriLayout);
+        // 将原布局取出放回decorView
+        List<View> oriLayouts = new ArrayList<>();
+        for (int i = 0, count = rootLayout.getChildCount(); i < count; i++) {
+            oriLayouts.add(rootLayout.getChildAt(i));
+        }
+        for (View oriLayout : oriLayouts) {
+            rootLayout.removeView(oriLayout);
+            decorView.addView(oriLayout);
+        }
     }
 
     /**

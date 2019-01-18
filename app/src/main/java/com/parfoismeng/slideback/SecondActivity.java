@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.parfoismeng.slidebacklib.SlideBack;
 import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
 
@@ -14,6 +15,8 @@ import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
  * desc   : ...
  */
 public class SecondActivity extends AppCompatActivity {
+    private boolean regSlideBack = false;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,27 +31,32 @@ public class SecondActivity extends AppCompatActivity {
 
         findViewById(R.id.textView2).setVisibility(View.GONE);
         TextView textView = findViewById(R.id.textView1);
-        textView.setText("SecondActivity");
+        textView.setText("SecondActivity\nClick Me To Switch");
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SlideBack.unregister(SecondActivity.this);
+                if (regSlideBack) {
+                    SlideBack.unregister(SecondActivity.this);
+                } else {
+                    registerSlideBack();
+                }
+                regSlideBack = !regSlideBack;
+                showToast("SlideBack-" + regSlideBack);
             }
         });
 
-        SlideBack.with(this) // 新 构建侧滑管理器 - 用于更丰富的自定义配置
-                .haveScroll(true) // 是否包含滑动控件 默认false
-                .callBack(new SlideBackCallBack() { // 回调
+        regSlideBack = true;
+        registerSlideBack();
+    }
+
+    private void registerSlideBack() {
+        SlideBack.with(this)
+                .callBack(new SlideBackCallBack() {
                     @Override
                     public void onSlideBack() {
-                        finish();
+                        showToast("SlideBack-SecondActivity");
                     }
                 })
-                .viewHeight(120) //
-                .arrowSize(5)
-                .maxSlideLength(20)
-                .sideSlideLength(10)
-                .dragRate(3)
                 .register();
     }
 
@@ -56,5 +64,15 @@ public class SecondActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         SlideBack.unregister(this);
+    }
+
+    private Toast toast;
+
+    private void showToast(String msg) {
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
