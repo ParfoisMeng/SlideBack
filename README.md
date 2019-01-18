@@ -8,8 +8,7 @@
 ### 前情
 最近一直在研究侧滑返回效果的实现，目前比较多的方案如下：
 
- 1. 背景透明主题。问题是性能与神坑"Only fullscreen activities can request
-    orientation"。
+ 1. 背景透明主题。问题是性能与神坑"Only fullscreen activities can request orientation"。
  2. 将上页ContentView绘制到当前页，侧滑时动画推入推出。（也许挺不错？）
  3. 类全面屏返回手势。[即刻App](https://www.ruguoapp.com/)的效果（下图）。
 
@@ -37,60 +36,93 @@
 ```
 - 代码使用
 ```
-// Kotlin
-class SecondActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    // 在需要滑动返回的Activity中注册，最好但非必须在onCreate中
+    SlideBack.with(this)
+            .callBack(new SlideBackCallBack() {
+                @Override
+                public void onSlideBack() {
+                    finish();
+                }
+            })
+            .register();
 
-        // 在需要滑动返回的Activity中注册
-        SlideBack.register(this) {
-            Toast.makeText(this, "SlideBack", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        // onDestroy时记得解绑
-        // 内部使用WeakHashMap，理论上不解绑也行，但最好还是手动解绑一下
-        SlideBack.unregister(this)
-    }
-}
-
-// Java
-public class SecondActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // 在需要滑动返回的Activity中注册
-        SlideBack.register(this, new SlideBackCallBack() {
-            @Override
-            public void onSlideBack() {
-                Toast.makeText(SecondActivity.this, "SlideBack", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        // onDestroy时记得解绑
-        // 内部使用WeakHashMap，理论上不解绑也行，但最好还是手动解绑一下
-        SlideBack.unregister(this);
-    }
-}
-
-// ...
-// 如果需要在有可滑动View(RecycleView/ScrollView等)的Activity中使用，请使用此注册方法。
-// haveScroll：页面是否有滑动
-SlideBack.register(Activity activity, boolean haveScroll, SlideBackCallBack callBack)
+    // onDestroy时解绑
+    // 内部使用WeakHashMap，理论上不解绑也行，但最好还是手动解绑一下
+    SlideBack.unregister(this);
 ```
 OJBK！So easy！
-- Fragment 支持，详见 [issues#2](https://github.com/ParfoisMeng/SlideBack/issues/2)
-> 1. 在Fragment的父级Activity中注册SlideBack
-> 2. 在SlideBackCallBack中remove栈顶的Fragment
+
+> - 旧方法仍然可用
+> > <details>
+> > <summary>点击展开查看</summary>
+> >
+> > ```
+> > // Kotlin
+> > class SecondActivity : AppCompatActivity() {
+> >     override fun onCreate(savedInstanceState: Bundle?) {
+> >         super.onCreate(savedInstanceState)
+> >
+> >         // 在需要滑动返回的Activity中注册
+> >         SlideBack.register(this) {
+> >             Toast.makeText(this, "SlideBack", Toast.LENGTH_SHORT).show()
+> >         }
+> >     }
+> >
+> >     override fun onDestroy() {
+> >         super.onDestroy()
+> >
+> >         // onDestroy时记得解绑
+> >         // 内部使用WeakHashMap，理论上不解绑也行，但最好还是手动解绑一下
+> >         SlideBack.unregister(this)
+> >     }
+> > }
+> >
+> > // Java
+> > public class SecondActivity extends AppCompatActivity {
+> >     @Override
+> >     protected void onCreate(@Nullable Bundle savedInstanceState) {
+> >         super.onCreate(savedInstanceState);
+> >
+> >         // 在需要滑动返回的Activity中注册
+> >         SlideBack.register(this, new SlideBackCallBack() {
+> >             @Override
+> >             public void onSlideBack() {
+> >                 Toast.makeText(SecondActivity.this, "SlideBack", Toast.LENGTH_SHORT).show();
+> >             }
+> >         });
+> >     }
+> >
+> >     @Override
+> >     protected void onDestroy() {
+> >         super.onDestroy();
+> >
+> >         // onDestroy时记得解绑
+> >         // 内部使用WeakHashMap，理论上不解绑也行，但最好还是手动解绑一下
+> >         SlideBack.unregister(this);
+> >     }
+> > }
+> >
+> > // ...
+> > // 如果需要在有可滑动View(RecycleView/ScrollView等)的Activity中使用，请使用此注册方法。
+> > // haveScroll：页面是否有滑动
+> > SlideBack.register(Activity activity, boolean haveScroll, SlideBackCallBack callBack)
+> > ```
+> > </details>
+> - API
+> ```
+> SlideBack.with(this) // 新 构建侧滑管理器 - 用于更丰富的自定义配置
+>         .haveScroll(false) // 是否包含滑动控件 默认false
+>         .callBack(SlideBackCallBack) // 回调
+>         .viewHeight(viewHeightDP) // 控件高度 默认屏高/4
+>         .arrowSize(arrowSizeDP) // 箭头大小 默认5dp
+>         .maxSlideLength(maxSlideLengthDP) // 最大拉动距离（控件最大宽度） 默认屏宽/12
+>         .sideSlideLength(sideSlideLengthDP) // 侧滑响应距离 默认控件最大宽度/2
+>         .dragRate(dragRate) // 阻尼系数 默认3（越小越灵敏）
+>         .register();
+> ```
+> - Fragment 支持，详见 [issues#2](https://github.com/ParfoisMeng/SlideBack/issues/2)
+>   1. 在Fragment的父级Activity中注册SlideBack
+>   2. 在SlideBackCallBack中remove栈顶的Fragment
 
 ### 性能
 附一张性能截图。可以看出来中间进行了很多次 onCreate & onDestory，最后内存和开始时一致：
@@ -104,18 +136,16 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.p
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
 
 ### 更新
-1. 滑动事件冲突问题，修复 [issues#1](https://github.com/ParfoisMeng/SlideBack/issues/1) - 1.0.3
-2. 添加大量注释 & 源码分析MD - 未更新版本
+1. 提供新的可配置更多参数的注册方法（旧方法仍然可用） - 1.0.4
+2. 滑动事件冲突问题，修复 [issues#1](https://github.com/ParfoisMeng/SlideBack/issues/1) - 1.0.3
 3. 删除无用依赖，添加Java引用示例 - 1.0.2
 4. 检查警告，修改类名，更新README.md - 1.0.1
 5. 初版发布 - 1.0.0
 
 ### 计划
 1. 给郭婶投稿，源码分析MD没通过。准备抽时间重写一下。
-3. 目前还是依赖了v7包，作用仅为@ColorInt和@Nullable约束，要不要保留呢？
-4. 提交个Kotlin版本（其实AS直接转换就行...）。
 2. 目前滑动事件冲突的解决方案(1.0.3)不是很理想，但市面上好像都是这么解决的，如果您有更好的方案，请与我沟通，十分欢迎PR。
-5. 看情况吧......
+3. 看情况吧......
 
 ### 支持
 劳烦各位大佬给个Star让我出去好装B行嘛！
