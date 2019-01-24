@@ -20,7 +20,7 @@ public class SlideBackIconView extends View {
     private Paint bgPaint, arrowPaint; // 画笔对象
 
     @ColorInt
-    private int backViewColor = Color.BLACK; // 默认值
+    private int backViewColor = Color.BLACK; // 控件背景色
     private float backViewHeight = 0; // 控件高度
     private float arrowSize = 10; // 箭头图标大小
     private float maxSlideLength = 0; // 最大拉动距离

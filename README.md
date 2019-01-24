@@ -17,7 +17,7 @@
 ### 预览
 | 即刻App | 本库 | Demo下载 |
 | :---: | :---: | :---: |
-| <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/jike.gif" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/mine.gif" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/demo/demo_qr.gif" width="260px"/><br><br>[Demo下载](https://raw.githubusercontent.com/ParfoisMeng/SlideBack/master/demo/demo.apk) |
+| <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/jike.gif" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/mine.gif" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/demo/demo_qr.gif" width="260px"/><br><br>[Demo下载](https://raw.githubusercontent.com/ParfoisMeng/SlideBack/master/demo/demo.apk) |
 
 ### 使用
  - 引用类库 *请将last-version替换为最新版本号 [![](https://jitpack.io/v/ParfoisMeng/SlideBack.svg)](https://jitpack.io/#ParfoisMeng/SlideBack)
@@ -127,10 +127,11 @@ OJBK！So easy！
 ### 性能
 附一张性能截图。可以看出来中间进行了很多次 onCreate & onDestory，最后内存和开始时一致：
 ![
-MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.png)
+MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.png)
 
 ### 分析
 源码分析MD：[Analysis.md](https://github.com/ParfoisMeng/SlideBack/blob/master/Analysis.md)
+源码分析MD：[Analysis_v2.md](https://github.com/ParfoisMeng/SlideBack/blob/master/Analysis_v2.md)
 
 ### 感谢
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
@@ -156,10 +157,10 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/memory.p
 
 | QQ | WeChat | Email |
 | :---: | :---: | :---: |
-| 757479544<br><br><img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/qq_qr.jpg" width="260px"/> | youshi520000<br><br><img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wx_qr.png" width="260px"/> | youshi520000@163.com<br><br>yi520000@vip.qq.com<br><br>youshi.meng@gmail.com<br><br>parfois.meng@icloud.com<br><br>parfois.meng@outlook.com |
+| 757479544<br><br><img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/qq_qr.jpg" width="260px"/> | youshi520000<br><br><img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/wx_qr.png" width="260px"/> | youshi520000@163.com<br><br>yi520000@vip.qq.com<br><br>youshi.meng@gmail.com<br><br>parfois.meng@icloud.com<br><br>parfois.meng@outlook.com |
 -->
 - 赏杯咖啡
 
 | Alipay | WeChat Pay |
 | --- | --- |
-| <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/alipay.jpg" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/wechat.png" width="260px"/> |
+| <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/alipay.jpg" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/wechat.png" width="260px"/> |

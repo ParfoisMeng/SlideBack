@@ -126,6 +126,7 @@ public class SlideBackManager {
         container.setOnTouchListener(new View.OnTouchListener() {
             private boolean isSideSlide = false;  // 是否从边缘开始滑动
             private float downX = 0; // 按下的X轴坐标
+            private float moveXLength = 0; // 位移的X轴距离
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -138,10 +139,10 @@ public class SlideBackManager {
                         break;
                     case MotionEvent.ACTION_MOVE: // 移动
                         if (isSideSlide) { // 是从边缘开始滑动
-                            float moveX = event.getRawX() - downX; // 获取X轴位移距离
-                            if (Math.abs(moveX) <= maxSlideLength * dragRate) {
+                            moveXLength = Math.abs(event.getRawX() - downX); // 获取X轴位移距离
+                            if (moveXLength / dragRate <= maxSlideLength) {
                                 // 如果位移距离在可拉动距离内，更新SlideBackIconView的当前拉动距离并重绘
-                                slideBackIconView.updateSlideLength(Math.abs(moveX) / dragRate);
+                                slideBackIconView.updateSlideLength(moveXLength / dragRate);
                             }
                             // 根据Y轴位置给SlideBackIconView定位
                             setSlideBackPosition(slideBackIconView, (int) (event.getRawY()));
@@ -149,7 +150,7 @@ public class SlideBackManager {
                         break;
                     case MotionEvent.ACTION_UP: // 抬起
                         // 是从边缘开始滑动 且 抬起点的X轴坐标大于某值(默认3倍最大滑动长度)
-                        if (isSideSlide && event.getRawX() >= maxSlideLength * dragRate) {
+                        if (isSideSlide && moveXLength / dragRate >= maxSlideLength) {
                             if (null != SlideBackManager.this.callBack) {
                                 // 不为空则响应回调事件
                                 SlideBackManager.this.callBack.onSlideBack();

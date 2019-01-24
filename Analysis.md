@@ -2,7 +2,7 @@
 
 ### 看效果，做分析
 先从即刻效果图（下图）分析一下。
-![即刻效果图](https://github.com/ParfoisMeng/SlideBack/blob/master/screenshot/jike.gif)
+![即刻效果图](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/jike.gif)
 ##### 拆解情景如下：
 1. 手指从屏幕侧边一定范围内滑出
 2. 屏幕边缘出现黑底白箭头的指示View，随手指触点位移变化
