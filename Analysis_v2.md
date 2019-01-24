@@ -4,7 +4,7 @@
 
 ### 先看效果，做分析
 
-从即刻效果图（下图）分析一下：
+从即刻效果图（下图）分析一下：  
 ![即刻效果图](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/jike.gif)
 
 ##### 拆解情景：
@@ -21,7 +21,7 @@
 2. `ACTION_MOVE` - 黑底白箭头View肯定要自定义实现。View跟随位移距离`moveXLength`(即`event.getRawX() - downX`,同View当前宽度*某系数)变化，同时设置View的topMargin为`event.getRawY() - viewHeight/2`，以达到定位效果。当`moveXLength`大于某阈值时，不再跟随其变化。
 3. `ACTION_UP` - 手指抬起时，`moveXLength`大于某阈值(即View最大宽度*某系数)则触发事件，事件需要定义一个接口回调给外部。
 
-我们要监听谁的`OnTouchListener`？
+我们要监听谁的`OnTouchListener`？  
 要在整个Activity响应，且与具体布局`ContentView`无关。随后就想到了`decorView`。
 
 ---
@@ -40,7 +40,7 @@
 3. `onDraw`时需要先`Path.reset()`重置路径对象，因为onDraw会多次调用。
 4. 注意位移过程中的效果，View随位移距离变化时，白箭头是透明度渐变，同时直线由短边长再折弯成角。由此可知，需要用View最大宽度与当前宽度的比例来控制透明度、线段长度与角度。
 
-省略其他set代码，核心代码如下：
+省略其他set方法，核心代码如下：
 ```java
     /**
      * 因为过程中会多次绘制，所以要先重置路径再绘制。
@@ -92,7 +92,7 @@
 
 ##### `decorView`的`OnTouchListener`事件
 
-在一个单独的管理器里，传入Activity对象，用以获取该Activity的`decorView`对象，将*黑底白箭头View*添加进去并设置触摸监听`OnTouchListener` - [SlideBackManager](https://github.com/ParfoisMeng/SlideBack/blob/master/slidebacklib/src/main/java/com/parfoismeng/slidebacklib/SlideBackManager.java)。
+在一个单独的管理器里，传入Activity对象，用以获取该Activity的`decorView`对象，将*黑底白箭头View*添加进去并设置触摸监听`OnTouchListener` - [SlideBackManager](https://github.com/ParfoisMeng/SlideBack/blob/master/slidebacklib/src/main/java/com/parfoismeng/slidebacklib/SlideBackManager.java)。  
 监听事件的逻辑上面已经分析过，核心代码如下：
 ```
         FrameLayout container = (FrameLayout) activity.getWindow().getDecorView();
@@ -145,11 +145,11 @@
 1. 注册 - 传入Activity对象，获取对应的`decorView`，将上述自定义的View添加进布局`container.addView(slideBackIconView)`，并`setOnTouchListener`。
 2. 解绑 - 将管理器中的变量置空垃圾回收。此操作不做也可以，无引用时会自动回收。
 
-方便统一管理，我们使用`WeakHashMap<Activity, SlideBackManager>`去管理每个Activity对应的侧滑管理器。注册时加入map，解绑时移除。同时因为`WeakHashMap`内部使用弱引用，也避免了误操作导致的内存泄漏。
+方便统一管理，我们使用`WeakHashMap<Activity, SlideBackManager>`去管理每个Activity对应的侧滑管理器。注册时加入map，解绑时移除。同时因为`WeakHashMap`内部使用弱引用，也避免了误操作导致的内存泄漏。  
 其他不详述了，具体参见[SlideBack](https://github.com/ParfoisMeng/SlideBack/blob/master/slidebacklib/src/main/java/com/parfoismeng/slidebacklib/SlideBack.java)。
 
 ### 总结
 
-身为一个程序猿，抽象思维很重要。脱离现象去看本质，把现象拆解成好几步，只要你拆解得够细致，每一步都有可以实现的代码。串起来就是一个实现思路，有了思路再实践去验证。做了就明白了。
-另外，多学多看。Github那么多优质开源项目可学习，没事多看看，从中学习别人思路与逻辑，理解转化成自己的东西。长此以往好处不言而喻。
-PS：看完还有不懂的话，请阅读源码。还有问题可以[issues](https://github.com/ParfoisMeng/SlideBack/issues)提问。
+身为一个程序猿，抽象思维很重要。脱离现象去看本质，把现象拆解成好几步，只要你拆解得够细致，每一步都有可以实现的代码。串起来就是一个实现思路，有了思路再实践去验证。做了就明白了。  
+另外，多学多看。Github那么多优质开源项目可学习，没事多看看，从中学习别人思路与逻辑，理解转化成自己的东西。长此以往好处不言而喻。  
+PS：看完还有不懂的话，请阅读源码。还有问题可以[issues](https://github.com/ParfoisMeng/SlideBack/issues)提问。  

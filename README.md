@@ -1,7 +1,6 @@
 
 # SlideBack
-无需继承的Activity侧滑返回库 类全面屏返回手势效果 仿“即刻”侧滑返回
-[![](https://jitpack.io/v/ParfoisMeng/SlideBack.svg)](https://jitpack.io/#ParfoisMeng/SlideBack)
+无需继承的Activity侧滑返回库 类全面屏返回手势效果 仿“即刻”侧滑返回  [![](https://jitpack.io/v/ParfoisMeng/SlideBack.svg)](https://jitpack.io/#ParfoisMeng/SlideBack)
 
 ---
 
@@ -22,17 +21,17 @@
 ### 使用
  - 引用类库 *请将last-version替换为最新版本号 [![](https://jitpack.io/v/ParfoisMeng/SlideBack.svg)](https://jitpack.io/#ParfoisMeng/SlideBack)
 ```
-	// 1.添加jitpack仓库
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
-	}
-	// 2.添加项目依赖（last-version替换为最新版本号）
-	dependencies {
-		implementation 'com.github.parfoismeng:slideback:last-version'
-	}
+    // 1.添加jitpack仓库
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+    // 2.添加项目依赖（last-version替换为最新版本号）
+    dependencies {
+        implementation 'com.github.parfoismeng:slideback:last-version'
+    }
 ```
 - 代码使用
 ```
@@ -125,13 +124,12 @@ OJBK！So easy！
 >   2. 在SlideBackCallBack中remove栈顶的Fragment
 
 ### 性能
-附一张性能截图。可以看出来中间进行了很多次 onCreate & onDestory，最后内存和开始时一致：
+附一张性能截图。可以看出来中间进行了很多次 onCreate & onDestroy，最后内存和开始时一致：  
 ![
 MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.png)
 
 ### 分析
-源码分析MD：[Analysis.md](https://github.com/ParfoisMeng/SlideBack/blob/master/Analysis.md)
-源码分析MD：[Analysis_v2.md](https://github.com/ParfoisMeng/SlideBack/blob/master/Analysis_v2.md)
+源码分析MD：[Analysis.md](https://github.com/ParfoisMeng/SlideBack/blob/master/Analysis.md) & [Analysis_v2.md](https://github.com/ParfoisMeng/SlideBack/blob/master/Analysis_v2.md)
 
 ### 感谢
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
@@ -144,9 +142,10 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.pn
 5. 初版发布 - 1.0.0
 
 ### 计划
-1. 给郭婶投稿，源码分析MD没通过。准备抽时间重写一下。
-2. 目前滑动事件冲突的解决方案(1.0.3)不是很理想，但市面上好像都是这么解决的，如果您有更好的方案，请与我沟通，十分欢迎PR。
-3. 看情况吧......
+1. <del>给郭婶投稿，源码分析MD没通过。准备抽时间重写一下。</del>已重写，再投一遍试试 :-)
+2. 貌似有屏幕右侧侧滑的需求？[issues#4](https://github.com/ParfoisMeng/SlideBack/issues/4)
+3. 目前滑动事件冲突的解决方案(1.0.3)不是很理想，但市面上好像都是这么解决的，如果您有更好的方案，请与我沟通，十分欢迎PR。
+4. 看情况吧......
 
 ### 支持
 劳烦各位大佬给个Star让我出去好装B行嘛！
