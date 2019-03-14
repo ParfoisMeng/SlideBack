@@ -29,7 +29,7 @@
     }
     // 2.添加项目依赖（last-version替换为最新版本号）
     dependencies {
-        implementation 'com.github.parfoismeng:slideback:last-version'
+        implementation 'com.github.ParfoisMeng:SlideBack:last-version'
     }
 ```
 
