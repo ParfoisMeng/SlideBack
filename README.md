@@ -33,7 +33,7 @@
     }
 ```
 
-- 代码简单使用，详见下方[API](https://github.com/ParfoisMeng/SlideBack#api)
+- 代码简单使用，详见下方 [API](#API)
 ```
     // 在需要滑动返回的Activity中注册，最好但非必须在onCreate中
     SlideBack.with(this)
@@ -158,15 +158,3 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.pn
 
 ### 支持
 劳烦各位大佬给个Star让我出去好装B行嘛！
-
-// ### 其他
-// <details>
-// <summary> 赏杯咖啡 </summary>
-//
-// <br>
-//
-// | Alipay | WeChat Pay |
-// | --- | --- |
-// | <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/alipay.jpg" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/wechat.png" width="260px"/> |
-//
-// </details>
