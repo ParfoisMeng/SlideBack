@@ -133,7 +133,7 @@ SlideBack.with(this) // 新 构建侧滑管理器 - 用于更丰富的自定义�
 ```
 
 ### 性能
-附一张性能截图。可以看出来中间进行了很多次 onCreate & onDestroy，最后内存和开始时一致：  
+附一张性能截图。可以看出来中间进行了很多次 onCreate & onDestroy，最后内存和开始时一致：<br>
 ![
 MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.png)
 
@@ -152,29 +152,21 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.pn
 6. 初版发布 - 1.0.0
 
 ### 计划
-1. 源码分析MD给郭婶投二稿也没通过……<del>啥时候有想法再重写吧 :-)</del>
+1. 源码分析MD给郭婶投两稿也没通过……<del>啥时候有想法再重写吧 :-(</del>
 2. 目前滑动事件冲突的解决方案(1.0.3)不是很理想，但市面上好像都是这么解决的，如果您有更好的方案，请与我沟通，十分欢迎PR。
 3. 看情况吧......
 
 ### 支持
 劳烦各位大佬给个Star让我出去好装B行嘛！
 
-### 其他
-<!--
-- 加我好友（请注明来意）
-
-| QQ | WeChat | Email |
-| :---: | :---: | :---: |
-| 757479544<br><br><img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/qq_qr.jpg" width="260px"/> | youshi520000<br><br><img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/wx_qr.png" width="260px"/> | youshi520000@163.com<br><br>yi520000@vip.qq.com<br><br>youshi.meng@gmail.com<br><br>parfois.meng@icloud.com<br><br>parfois.meng@outlook.com |
--->
-
-<details>
-<summary> 赏杯咖啡 </summary>
- 
-<br>
-
-| Alipay | WeChat Pay |
-| --- | --- |
-| <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/alipay.jpg" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/wechat.png" width="260px"/> |
-
-</details>
+// ### 其他
+// <details>
+// <summary> 赏杯咖啡 </summary>
+//
+// <br>
+//
+// | Alipay | WeChat Pay |
+// | --- | --- |
+// | <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/alipay.jpg" width="260px"/> | <img src="https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/wechat.png" width="260px"/> |
+//
+// </details>
