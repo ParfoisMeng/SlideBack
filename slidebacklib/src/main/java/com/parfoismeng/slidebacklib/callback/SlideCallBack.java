@@ -17,5 +17,10 @@ public abstract class SlideCallBack implements SlideBackCallBack {
         }
     }
 
+    /**
+     * 滑动来源： <br>
+     * EDGE_LEFT    左侧侧滑 <br>
+     * EDGE_RIGHT   右侧侧滑 <br>
+     */
     public abstract void onSlide(int edgeFrom);
 }

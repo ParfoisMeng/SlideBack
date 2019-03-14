@@ -35,8 +35,8 @@ public class SlideBackManager {
     private float sideSlideLength; // 侧滑响应距离
     private float dragRate; // 阻尼系数
 
-    private boolean isEdgeLeft; // 使用左侧侧滑
-    private boolean isEdgeRight; // 使用右侧侧滑
+    private boolean isAllowEdgeLeft; // 使用左侧侧滑
+    private boolean isAllowEdgeRight; // 使用右侧侧滑
 
     private float screenWidth; // 屏幕宽
 
@@ -56,8 +56,8 @@ public class SlideBackManager {
         dragRate = 3; // 阻尼系数默认 3
 
         // 侧滑返回模式 默认:左
-        isEdgeLeft = true;
-        isEdgeRight = false;
+        isAllowEdgeLeft = true;
+        isAllowEdgeRight = false;
     }
 
     /**
@@ -135,16 +135,16 @@ public class SlideBackManager {
     public SlideBackManager edgeMode(@SlideBack.EdgeMode int edgeMode) {
         switch (edgeMode) {
             case EDGE_LEFT:
-                isEdgeLeft = true;
-                isEdgeRight = false;
+                isAllowEdgeLeft = true;
+                isAllowEdgeRight = false;
                 break;
             case EDGE_RIGHT:
-                isEdgeLeft = false;
-                isEdgeRight = true;
+                isAllowEdgeLeft = false;
+                isAllowEdgeRight = true;
                 break;
             case EDGE_BOTH:
-                isEdgeLeft = true;
-                isEdgeRight = true;
+                isAllowEdgeLeft = true;
+                isAllowEdgeRight = true;
                 break;
             default:
                 throw new RuntimeException("未定义的边缘侧滑模式值：EdgeMode = " + edgeMode);
@@ -157,14 +157,14 @@ public class SlideBackManager {
      */
     @SuppressLint("ClickableViewAccessibility")
     public void register() {
-        if (isEdgeLeft) {
+        if (isAllowEdgeLeft) {
             // 初始化SlideBackIconView 左侧
             slideBackIconViewLeft = new SlideBackIconView(activity);
             slideBackIconViewLeft.setBackViewHeight(backViewHeight);
             slideBackIconViewLeft.setArrowSize(arrowSize);
             slideBackIconViewLeft.setMaxSlideLength(maxSlideLength);
         }
-        if (isEdgeRight) {
+        if (isAllowEdgeRight) {
             // 初始化SlideBackIconView - Right
             slideBackIconViewRight = new SlideBackIconView(activity);
             slideBackIconViewRight.setBackViewHeight(backViewHeight);
@@ -181,10 +181,10 @@ public class SlideBackManager {
             interceptLayout.setSideSlideLength(sideSlideLength);
             addInterceptLayout(container, interceptLayout);
         }
-        if (isEdgeLeft) {
+        if (isAllowEdgeLeft) {
             container.addView(slideBackIconViewLeft);
         }
-        if (isEdgeRight) {
+        if (isAllowEdgeRight) {
             container.addView(slideBackIconViewRight);
         }
         container.setOnTouchListener(new View.OnTouchListener() {
@@ -201,9 +201,9 @@ public class SlideBackManager {
                         downX = event.getRawX();
 
                         // 检验是否从边缘开始滑动，区分左右
-                        if (isEdgeLeft && downX <= sideSlideLength) {
+                        if (isAllowEdgeLeft && downX <= sideSlideLength) {
                             isSideSlideLeft = true;
-                        } else if (isEdgeRight && downX >= screenWidth - sideSlideLength) {
+                        } else if (isAllowEdgeRight && downX >= screenWidth - sideSlideLength) {
                             isSideSlideRight = true;
                         }
                         break;
@@ -214,17 +214,17 @@ public class SlideBackManager {
                             moveXLength = Math.abs(event.getRawX() - downX);
                             if (moveXLength / dragRate <= maxSlideLength) {
                                 // 如果位移距离在可拉动距离内，更新SlideBackIconView的当前拉动距离并重绘，区分左右
-                                if (isEdgeLeft && isSideSlideLeft) {
+                                if (isAllowEdgeLeft && isSideSlideLeft) {
                                     slideBackIconViewLeft.updateSlideLength(moveXLength / dragRate);
-                                } else if (isEdgeRight && isSideSlideRight) {
+                                } else if (isAllowEdgeRight && isSideSlideRight) {
                                     slideBackIconViewRight.updateSlideLength(moveXLength / dragRate);
                                 }
                             }
 
                             // 根据Y轴位置给SlideBackIconView定位
-                            if (isEdgeLeft && isSideSlideLeft) {
+                            if (isAllowEdgeLeft && isSideSlideLeft) {
                                 setSlideBackPosition(slideBackIconViewLeft, (int) (event.getRawY()));
-                            } else if (isEdgeRight && isSideSlideRight) {
+                            } else if (isAllowEdgeRight && isSideSlideRight) {
                                 setSlideBackPosition(slideBackIconViewRight, (int) (event.getRawY()));
                             }
                         }
@@ -237,9 +237,9 @@ public class SlideBackManager {
                         }
 
                         // 恢复SlideBackIconView的状态
-                        if (isEdgeLeft && isSideSlideLeft) {
+                        if (isAllowEdgeLeft && isSideSlideLeft) {
                             slideBackIconViewLeft.updateSlideLength(0);
-                        } else if (isEdgeRight && isSideSlideRight) {
+                        } else if (isAllowEdgeRight && isSideSlideRight) {
                             slideBackIconViewRight.updateSlideLength(0);
                         }
 
@@ -248,7 +248,7 @@ public class SlideBackManager {
                         isSideSlideRight = false;
                         break;
                 }
-                return isSideSlideLeft;
+                return isSideSlideLeft || isSideSlideRight;
             }
         });
     }

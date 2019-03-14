@@ -45,6 +45,7 @@ public class SecondActivity extends AppCompatActivity {
 //                        Toast.makeText(SecondActivity.this, "SlideBack", Toast.LENGTH_SHORT).show();
 //                    }
 //                })
+                .edgeMode(SlideBack.EDGE_BOTH)
                 .callBack(new SlideCallBack() {
                     @Override
                     public void onSlide(int edgeFrom) {
@@ -55,12 +56,11 @@ public class SecondActivity extends AppCompatActivity {
                         }
                     }
                 })
-//                .viewHeight(120) //
-//                .arrowSize(5)
-//                .maxSlideLength(20)
-//                .sideSlideLength(10)
-//                .dragRate(3)
-                .edgeMode(SlideBack.EDGE_BOTH)
+                .viewHeight(120) //
+                .arrowSize(5)
+                .maxSlideLength(20)
+                .sideSlideLength(10)
+                .dragRate(3)
                 .register();
     }
 
