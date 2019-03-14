@@ -33,7 +33,7 @@
     }
 ```
 
-- 代码简单使用，详见下方API
+- 代码简单使用，详见下方[API](https://github.com/ParfoisMeng/SlideBack#api)
 ```
     // 在需要滑动返回的Activity中注册，最好但非必须在onCreate中
     SlideBack.with(this)
