@@ -5,8 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.parfoismeng.slidebacklib.SlideBack;
-import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
+import com.parfoismeng.slidebacklib.callback.SlideCallBack;
 
 /**
  * author : ParfoisMeng
@@ -37,18 +38,29 @@ public class SecondActivity extends AppCompatActivity {
         });
 
         SlideBack.with(this) // 新 构建侧滑管理器 - 用于更丰富的自定义配置
-                .haveScroll(true) // 是否包含滑动控件 默认false
-                .callBack(new SlideBackCallBack() { // 回调
+//                .haveScroll(true) // 是否包含滑动控件 默认false
+//                .callBack(new SlideBackCallBack() { // 回调
+//                    @Override
+//                    public void onSlideBack() {
+//                        Toast.makeText(SecondActivity.this, "SlideBack", Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+                .callBack(new SlideCallBack() {
                     @Override
-                    public void onSlideBack() {
-                        finish();
+                    public void onSlide(int edgeFrom) {
+                        if (edgeFrom == SlideBack.EDGE_LEFT) {
+                            Toast.makeText(SecondActivity.this, "SlideBack + EDGE_LEFT", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(SecondActivity.this, "SlideBack + EDGE_RIGHT", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 })
-                .viewHeight(120) //
-                .arrowSize(5)
-                .maxSlideLength(20)
-                .sideSlideLength(10)
-                .dragRate(3)
+//                .viewHeight(120) //
+//                .arrowSize(5)
+//                .maxSlideLength(20)
+//                .sideSlideLength(10)
+//                .dragRate(3)
+                .edgeMode(SlideBack.EDGE_BOTH)
                 .register();
     }
 

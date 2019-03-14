@@ -1,8 +1,11 @@
 package com.parfoismeng.slidebacklib;
 
 import android.app.Activity;
+import android.support.annotation.IntDef;
 import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.WeakHashMap;
 
 /**
@@ -60,4 +63,23 @@ public class SlideBack {
         return manager;
     }
 
+    /**
+     * 侧滑返回模式 左
+     */
+    public static final int EDGE_LEFT = 0x0000;
+
+    /**
+     * 侧滑返回模式 右
+     */
+    public static final int EDGE_RIGHT = 0x0001;
+
+    /**
+     * 侧滑返回模式 左右皆可
+     */
+    public static final int EDGE_BOTH = 0x0002;
+
+    @IntDef({EDGE_LEFT, EDGE_RIGHT, EDGE_BOTH})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface EdgeMode {
+    }
 }
