@@ -144,7 +144,7 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.pn
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
 
 ### 更新
-1. 支持设置屏幕左右侧侧滑 [issues#4](https://github.com/ParfoisMeng/SlideBack/issues/4)
+1. 支持设置屏幕左右侧侧滑 [issues#4](https://github.com/ParfoisMeng/SlideBack/issues/4) - 1.0.5
 2. 提供新的可配置更多参数的注册方法（旧方法仍然可用） - 1.0.4
 3. 滑动事件冲突问题，修复 [issues#1](https://github.com/ParfoisMeng/SlideBack/issues/1) - 1.0.3
 4. 删除无用依赖，添加Java引用示例 - 1.0.2
