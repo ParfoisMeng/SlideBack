@@ -158,3 +158,6 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.pn
 
 ### 支持
 劳烦各位大佬给个Star让我出去好装B行嘛！
+
+### 其他
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
