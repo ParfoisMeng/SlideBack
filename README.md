@@ -111,13 +111,13 @@ SlideBack.register(Activity activity, boolean haveScroll, SlideBackCallBack call
 ```
 SlideBack.with(this) // 新 构建侧滑管理器 - 用于更丰富的自定义配置
         .haveScroll(false) // 是否包含滑动控件 默认false
+        .edgeMode(edgeMode) // 边缘侧滑模式 默认左
         .callBack(new SlideBackCallBack() { // 回调
             @Override
             public void onSlideBack() {
                 // TODO 回调事件
             }
         })
-        .edgeMode(edgeMode) // 边缘侧滑模式 默认左
         .callBack(new SlideCallBack() { // 回调2 适用于设置左右模式 *两种回调同时写，后者会覆盖前者
             @Override
             public void onSlide(int edgeFrom) {
@@ -144,12 +144,13 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.pn
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
 
 ### 更新
-1. 支持设置屏幕左右侧侧滑 [issues#4](https://github.com/ParfoisMeng/SlideBack/issues/4) - 1.0.5
-2. 提供新的可配置更多参数的注册方法（旧方法仍然可用） - 1.0.4
-3. 滑动事件冲突问题，修复 [issues#1](https://github.com/ParfoisMeng/SlideBack/issues/1) - 1.0.3
-4. 删除无用依赖，添加Java引用示例 - 1.0.2
-5. 检查警告，修改类名，更新README.md - 1.0.1
-6. 初版发布 - 1.0.0
+1. 包含滑动控件的页面设置EDGE_BOTH时右侧滑动失效的Bug修复 [issues#6](https://github.com/ParfoisMeng/SlideBack/issues/6) - 1.0.6
+2. 支持设置屏幕左右侧侧滑 [issues#4](https://github.com/ParfoisMeng/SlideBack/issues/4) - 1.0.5
+3. 提供新的可配置更多参数的注册方法（旧方法仍然可用） - 1.0.4
+4. 滑动事件冲突问题，修复 [issues#1](https://github.com/ParfoisMeng/SlideBack/issues/1) - 1.0.3
+5. 删除无用依赖，添加Java引用示例 - 1.0.2
+6. 检查警告，修改类名，更新README.md - 1.0.1
+7. 初版发布 - 1.0.0
 
 ### 计划
 1. 源码分析MD给郭婶投两稿也没通过……<del>啥时候有想法再重写吧 :-(</del>
@@ -160,4 +161,6 @@ MEMORY](https://github.com/ParfoisMeng/SlideBack/raw/master/screenshot/memory.pn
 劳烦各位大佬给个Star让我出去好装B行嘛！
 
 ### 其他
+已使用<b>996 License</b>，为程序员发声，为自己发声。
+
 [![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)

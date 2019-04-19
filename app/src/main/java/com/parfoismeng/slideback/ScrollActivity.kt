@@ -3,7 +3,9 @@ package com.parfoismeng.slideback
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.parfoismeng.slidebacklib.SlideBack
+import com.parfoismeng.slidebacklib.callback.SlideCallBack
 import kotlinx.android.synthetic.main.activity_scroll.*
 
 
@@ -12,9 +14,22 @@ class ScrollActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scroll)
 
-        SlideBack.register(this, true) {
-            finish()
-        }
+//        SlideBack.register(this, true) {
+//            finish()
+//        }
+        SlideBack.with(this) // 新 构建侧滑管理器 - 用于更丰富的自定义配置
+            .edgeMode(SlideBack.EDGE_BOTH)
+            .haveScroll(true)
+            .callBack(object : SlideCallBack() {
+                override fun onSlide(edgeFrom: Int) {
+                    if (edgeFrom == SlideBack.EDGE_LEFT) {
+                        Toast.makeText(this@ScrollActivity, "SlideBack + EDGE_LEFT", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@ScrollActivity, "SlideBack + EDGE_RIGHT", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
+            .register()
 
         val arr = ArrayList<String>()
         for (i in 0 until 20) {

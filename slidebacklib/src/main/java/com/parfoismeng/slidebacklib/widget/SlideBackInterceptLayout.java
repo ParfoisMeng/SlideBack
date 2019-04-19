@@ -28,7 +28,7 @@ public class SlideBackInterceptLayout extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        return ev.getAction() == MotionEvent.ACTION_DOWN && ev.getRawX() <= sideSlideLength;
+        return ev.getAction() == MotionEvent.ACTION_DOWN && (ev.getRawX() <= sideSlideLength || ev.getRawX() >= getWidth() - sideSlideLength);
     }
 
     public void setSideSlideLength(float sideSlideLength) {
