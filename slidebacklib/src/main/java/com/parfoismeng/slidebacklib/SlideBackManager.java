@@ -212,14 +212,17 @@ public class SlideBackManager {
                             // 从边缘开始滑动
                             // 获取X轴位移距离
                             moveXLength = Math.abs(event.getRawX() - downX);
-                            if (moveXLength / dragRate <= maxSlideLength) {
+                            float slideLength = moveXLength / dragRate;
+                            if (slideLength > maxSlideLength) {
+                                slideLength = maxSlideLength;
+                            }
                                 // 如果位移距离在可拉动距离内，更新SlideBackIconView的当前拉动距离并重绘，区分左右
                                 if (isAllowEdgeLeft && isSideSlideLeft) {
-                                    slideBackIconViewLeft.updateSlideLength(moveXLength / dragRate);
+                                    slideBackIconViewLeft.updateSlideLength(slideLength);
                                 } else if (isAllowEdgeRight && isSideSlideRight) {
-                                    slideBackIconViewRight.updateSlideLength(moveXLength / dragRate);
+                                    slideBackIconViewRight.updateSlideLength(slideLength);
                                 }
-                            }
+
 
                             // 根据Y轴位置给SlideBackIconView定位
                             if (isAllowEdgeLeft && isSideSlideLeft) {
