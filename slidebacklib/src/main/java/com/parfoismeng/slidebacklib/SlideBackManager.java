@@ -7,12 +7,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
 import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
 import com.parfoismeng.slidebacklib.callback.SlideCallBack;
 import com.parfoismeng.slidebacklib.widget.SlideBackIconView;
 import com.parfoismeng.slidebacklib.widget.SlideBackInterceptLayout;
 
-import static com.parfoismeng.slidebacklib.SlideBack.*;
+import static com.parfoismeng.slidebacklib.SlideBack.EDGE_BOTH;
+import static com.parfoismeng.slidebacklib.SlideBack.EDGE_LEFT;
+import static com.parfoismeng.slidebacklib.SlideBack.EDGE_RIGHT;
 
 /**
  * author : ParfoisMeng
@@ -208,21 +211,17 @@ public class SlideBackManager {
                         }
                         break;
                     case MotionEvent.ACTION_MOVE: // 移动
-                        if (isSideSlideLeft || isSideSlideRight) {
-                            // 从边缘开始滑动
+                        if (isSideSlideLeft || isSideSlideRight) { // 从边缘开始滑动
                             // 获取X轴位移距离
                             moveXLength = Math.abs(event.getRawX() - downX);
-                            float slideLength = moveXLength / dragRate;
-                            if (slideLength > maxSlideLength) {
-                                slideLength = maxSlideLength;
-                            }
-                                // 如果位移距离在可拉动距离内，更新SlideBackIconView的当前拉动距离并重绘，区分左右
-                                if (isAllowEdgeLeft && isSideSlideLeft) {
-                                    slideBackIconViewLeft.updateSlideLength(slideLength);
-                                } else if (isAllowEdgeRight && isSideSlideRight) {
-                                    slideBackIconViewRight.updateSlideLength(slideLength);
-                                }
 
+                            float slideLength = Math.min(moveXLength / dragRate, maxSlideLength);
+                            // 如果位移距离在可拉动距离内，更新SlideBackIconView的当前拉动距离并重绘，区分左右
+                            if (isAllowEdgeLeft && isSideSlideLeft) {
+                                slideBackIconViewLeft.updateSlideLength(slideLength);
+                            } else if (isAllowEdgeRight && isSideSlideRight) {
+                                slideBackIconViewRight.updateSlideLength(slideLength);
+                            }
 
                             // 根据Y轴位置给SlideBackIconView定位
                             if (isAllowEdgeLeft && isSideSlideLeft) {
