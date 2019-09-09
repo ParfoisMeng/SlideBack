@@ -143,7 +143,7 @@ SlideBack.with(this) // 新 构建侧滑管理器 - 用于更丰富的自定义�
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
 
 ### 更新
-* 快速滑动时SlideBackIconView没有到最大状态的Bug修复([issues#8](https://github.com/ParfoisMeng/SlideBack/issues/8))，感谢[g19980115](https://github.com/g19980115)发现并[PR](https://github.com/ParfoisMeng/SlideBack/pull/9)解决 - 1.0.6
+* 快速滑动时SlideBackIconView没有到最大状态的Bug修复([issues#8](https://github.com/ParfoisMeng/SlideBack/issues/8))，感谢[g19980115](https://github.com/g19980115)发现并[PR](https://github.com/ParfoisMeng/SlideBack/pull/9)解决 - 1.0.7
 * 包含滑动控件的页面设置EDGE_BOTH时右侧滑动失效的Bug修复([issues#6](https://github.com/ParfoisMeng/SlideBack/issues/6)) - 1.0.6
 * 支持设置屏幕左右侧侧滑([issues#4](https://github.com/ParfoisMeng/SlideBack/issues/4)) - 1.0.5
 * 提供新的可配置更多参数的注册方法（旧方法仍然可用） - 1.0.4
