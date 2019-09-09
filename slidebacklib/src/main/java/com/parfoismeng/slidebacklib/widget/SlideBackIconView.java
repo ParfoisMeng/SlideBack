@@ -107,6 +107,7 @@ public class SlideBackIconView extends View {
      * @param slideLength 当前拉动距离
      */
     public void updateSlideLength(float slideLength) {
+        if (this.slideLength == slideLength) return;
         this.slideLength = slideLength;
         invalidate(); // 会再次调用onDraw
     }
