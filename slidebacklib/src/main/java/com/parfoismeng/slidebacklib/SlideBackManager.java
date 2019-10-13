@@ -13,6 +13,8 @@ import com.parfoismeng.slidebacklib.callback.SlideCallBack;
 import com.parfoismeng.slidebacklib.widget.SlideBackIconView;
 import com.parfoismeng.slidebacklib.widget.SlideBackInterceptLayout;
 
+import java.lang.ref.WeakReference;
+
 import static com.parfoismeng.slidebacklib.SlideBack.EDGE_BOTH;
 import static com.parfoismeng.slidebacklib.SlideBack.EDGE_LEFT;
 import static com.parfoismeng.slidebacklib.SlideBack.EDGE_RIGHT;
@@ -26,7 +28,8 @@ public class SlideBackManager {
     private SlideBackIconView slideBackIconViewLeft;
     private SlideBackIconView slideBackIconViewRight;
 
-    private Activity activity;
+    //优化一处弱引用
+    private WeakReference<Activity> activity;
     private boolean haveScroll;
 
     private SlideCallBack callBack;
@@ -44,7 +47,7 @@ public class SlideBackManager {
     private float screenWidth; // 屏幕宽
 
     SlideBackManager(Activity activity) {
-        this.activity = activity;
+        this.activity = new WeakReference<>(activity);
         haveScroll = false;
 
         // 获取屏幕信息，初始化控件设置
@@ -162,14 +165,14 @@ public class SlideBackManager {
     public void register() {
         if (isAllowEdgeLeft) {
             // 初始化SlideBackIconView 左侧
-            slideBackIconViewLeft = new SlideBackIconView(activity);
+            slideBackIconViewLeft = new SlideBackIconView(activity.get());
             slideBackIconViewLeft.setBackViewHeight(backViewHeight);
             slideBackIconViewLeft.setArrowSize(arrowSize);
             slideBackIconViewLeft.setMaxSlideLength(maxSlideLength);
         }
         if (isAllowEdgeRight) {
             // 初始化SlideBackIconView - Right
-            slideBackIconViewRight = new SlideBackIconView(activity);
+            slideBackIconViewRight = new SlideBackIconView(activity.get());
             slideBackIconViewRight.setBackViewHeight(backViewHeight);
             slideBackIconViewRight.setArrowSize(arrowSize);
             slideBackIconViewRight.setMaxSlideLength(maxSlideLength);
@@ -178,9 +181,9 @@ public class SlideBackManager {
         }
 
         // 获取decorView并设置OnTouchListener监听
-        FrameLayout container = (FrameLayout) activity.getWindow().getDecorView();
+        FrameLayout container = (FrameLayout) activity.get().getWindow().getDecorView();
         if (haveScroll) {
-            SlideBackInterceptLayout interceptLayout = new SlideBackInterceptLayout(activity);
+            SlideBackInterceptLayout interceptLayout = new SlideBackInterceptLayout(activity.get());
             interceptLayout.setSideSlideLength(sideSlideLength);
             addInterceptLayout(container, interceptLayout);
         }
@@ -310,6 +313,6 @@ public class SlideBackManager {
     }
 
     private float dp2px(float dpValue) {
-        return dpValue * activity.getResources().getDisplayMetrics().density + 0.5f;
+        return dpValue * activity.get().getResources().getDisplayMetrics().density + 0.5f;
     }
 }

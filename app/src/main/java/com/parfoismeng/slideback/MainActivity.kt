@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
         textView2.setOnClickListener {
             startActivity(Intent(this@MainActivity, ScrollActivity::class.java))
         }
+        textView3.setOnClickListener {
+            startActivity(Intent(this@MainActivity, AnnotationActivity::class.java))
+        }
     }
 
     override fun onDestroy() {
