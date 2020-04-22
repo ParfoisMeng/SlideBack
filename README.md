@@ -124,9 +124,9 @@ SlideBack.with(this) // 新 构建侧滑管理器 - 用于更丰富的自定义�
                 // TODO edgeFrom(滑动来源): EDGE_LEFT(左侧) EDGE_RIGHT(右侧)
             }
         })
-        .viewHeight(viewHeightDP) // 控件高度 默认屏高/4
+        .viewHeight(viewHeightDP) // 控件高度 默认160dp
         .arrowSize(arrowSizeDP) // 箭头大小 默认5dp
-        .maxSlideLength(maxSlideLengthDP) // 最大拉动距离（控件最大宽度） 默认屏宽/12
+        .maxSlideLength(maxSlideLengthDP) // 最大拉动距离（控件最大宽度） 默认30dp
         .sideSlideLength(sideSlideLengthDP) // 侧滑响应距离 默认控件最大宽度/2
         .dragRate(dragRate) // 阻尼系数 默认3（越小越灵敏）
         .register();

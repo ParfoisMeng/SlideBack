@@ -51,9 +51,9 @@ public class SlideBackManager {
         DisplayMetrics dm = activity.getResources().getDisplayMetrics();
         screenWidth = dm.widthPixels;
 
-        backViewHeight = dm.heightPixels / 4f; // 高度默认 屏高/4
+        backViewHeight = dp2px(160); // 高度默认 160dp
         arrowSize = dp2px(5); // 箭头大小默认 5dp
-        maxSlideLength = screenWidth / 12; // 最大宽度默认 屏宽/12
+        maxSlideLength = dp2px(30); // 最大宽度默认 30dp
 
         sideSlideLength = maxSlideLength / 2; // 侧滑响应距离默认 控件最大宽度/2
         dragRate = 3; // 阻尼系数默认 3
@@ -93,7 +93,7 @@ public class SlideBackManager {
     }
 
     /**
-     * 控件高度 默认屏高/4
+     * 控件高度 默认160dp
      */
     public SlideBackManager viewHeight(float backViewHeightDP) {
         this.backViewHeight = dp2px(backViewHeightDP);
@@ -109,7 +109,7 @@ public class SlideBackManager {
     }
 
     /**
-     * 最大拉动距离（控件最大宽度） 默认屏宽/12
+     * 最大拉动距离（控件最大宽度） 默认30dp
      */
     public SlideBackManager maxSlideLength(float maxSlideLengthDP) {
         this.maxSlideLength = dp2px(maxSlideLengthDP);
