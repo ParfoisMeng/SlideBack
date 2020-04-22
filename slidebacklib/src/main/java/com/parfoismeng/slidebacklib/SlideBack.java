@@ -1,7 +1,9 @@
 package com.parfoismeng.slidebacklib;
 
 import android.app.Activity;
-import android.support.annotation.IntDef;
+
+import androidx.annotation.IntDef;
+
 import com.parfoismeng.slidebacklib.callback.SlideBackCallBack;
 
 import java.lang.annotation.Retention;
