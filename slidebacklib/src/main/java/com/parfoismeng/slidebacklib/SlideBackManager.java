@@ -3,7 +3,9 @@ package com.parfoismeng.slidebacklib;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -43,6 +45,9 @@ public class SlideBackManager {
 
     private float screenWidth; // 屏幕宽
 
+    private float notchSize; // 刘海高度
+    private float navBarSize; // 导航高度
+
     SlideBackManager(Activity activity) {
         this.activity = activity;
         haveScroll = false;
@@ -61,6 +66,10 @@ public class SlideBackManager {
         // 侧滑返回模式 默认:左
         isAllowEdgeLeft = true;
         isAllowEdgeRight = false;
+
+        // 直接设置 20dp/30dp 以解决问题，未开放设置
+        notchSize = dp2px(20);
+        navBarSize = dp2px(30);
     }
 
     /**
@@ -204,9 +213,9 @@ public class SlideBackManager {
                         downX = event.getRawX();
 
                         // 检验是否从边缘开始滑动，区分左右
-                        if (isAllowEdgeLeft && downX <= sideSlideLength) {
+                        if (isAllowEdgeLeft && downX <= sideSlideLength + (isLandscapeLeft() ? notchSize : 0)) {
                             isSideSlideLeft = true;
-                        } else if (isAllowEdgeRight && downX >= screenWidth - sideSlideLength) {
+                        } else if (isAllowEdgeRight && downX >= screenWidth - sideSlideLength - (isLandscapeLeft() ? navBarSize : (isLandscapeRight() ? notchSize + navBarSize : 0))) {
                             isSideSlideRight = true;
                         }
                         break;
@@ -311,5 +320,13 @@ public class SlideBackManager {
 
     private float dp2px(float dpValue) {
         return dpValue * activity.getResources().getDisplayMetrics().density + 0.5f;
+    }
+
+    private boolean isLandscapeLeft() {
+        return activity.getWindowManager().getDefaultDisplay().getRotation() == Surface.ROTATION_90;
+    }
+
+    private boolean isLandscapeRight() {
+        return activity.getWindowManager().getDefaultDisplay().getRotation() == Surface.ROTATION_270;
     }
 }
