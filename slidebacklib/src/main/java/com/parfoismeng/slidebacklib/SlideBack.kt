@@ -114,7 +114,7 @@ class SlideBack constructor(private val activity: Activity, private var haveScro
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
                         // 更新按下点的X轴坐标
-                        downX = event.rawX
+                        downX = event.x
 
                         // 检验是否从边缘开始滑动
                         if (downX <= sideSlideLength) {
@@ -125,13 +125,13 @@ class SlideBack constructor(private val activity: Activity, private var haveScro
                         // 从边缘开始滑动
                         if (isSideSlide) {
                             // 获取X轴位移距离
-                            moveXLength = max(event.rawX - downX, 0F)
+                            moveXLength = max(event.x - downX, 0F)
 
                             // 如果位移距离在可拉动距离内，更新SlideBackIconView的当前拉动距离并重绘，区分左右
                             iconView.updateSlideLength(min(moveXLength / dragRate, iconViewMaxLength))
 
                             // 根据Y轴位置给SlideBackIconView定位
-                            iconView.setSlideBackPosition(event.rawY)
+                            iconView.setSlideBackPosition(event.y)
                         }
                     }
                     MotionEvent.ACTION_UP -> {
