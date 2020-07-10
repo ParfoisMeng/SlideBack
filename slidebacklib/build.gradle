@@ -21,4 +21,9 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly 'androidx.appcompat:appcompat:1.1.0'
+    // Lifecycles
+    def lifecycle_version = "2.2.0"
+    compileOnly "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    compileOnly "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 }

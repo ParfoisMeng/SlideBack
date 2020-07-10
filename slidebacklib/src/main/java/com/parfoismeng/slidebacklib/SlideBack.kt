@@ -8,6 +8,10 @@ import android.view.View
 import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.activity.ComponentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import com.parfoismeng.slidebacklib.widget.SlideBackIconView
 import com.parfoismeng.slidebacklib.widget.SlideBackInterceptLayout
 import java.util.*
@@ -38,7 +42,7 @@ fun Activity.registerSlideBack(haveScroll: Boolean = true, callBack: () -> Unit,
  * 注销
  */
 fun Activity.unregisterSlideBack() {
-    slideBackMap.remove(this)
+    slideBackMap[this]?.unregister()
 }
 
 /**
@@ -46,7 +50,11 @@ fun Activity.unregisterSlideBack() {
  * time   : 2018/12/19
  * desc   : SlideBack管理器
  */
-class SlideBack constructor(private val activity: Activity, private var haveScroll: Boolean = true, private var callBack: () -> Unit) {
+class SlideBack constructor(
+    private val activity: Activity,
+    private var haveScroll: Boolean = true,
+    private var callBack: () -> Unit
+) : LifecycleObserver {
     /**
      * 侧滑返回 IconView
      */
@@ -96,6 +104,16 @@ class SlideBack constructor(private val activity: Activity, private var haveScro
      */
     @SuppressLint("ClickableViewAccessibility")
     fun register() {
+
+        // Add lifecycle observer
+        try {
+            (activity as ComponentActivity).apply {
+                lifecycle.addObserver(this@SlideBack)
+            }
+        } catch (e: ClassCastException) {
+            // Empty
+        }
+
         // 获取 decorView
         val container = activity.window.decorView as FrameLayout
         // 如果设置有滑动冲突的话，需要在根布局添加拦截布局
@@ -163,6 +181,11 @@ class SlideBack constructor(private val activity: Activity, private var haveScro
         // 用事件拦截处理Layout将原根布局包起来，再添加回去
         interceptLayout.addView(rootLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         decorView.addView(interceptLayout)
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun unregister() {
+        slideBackMap.remove(activity)
     }
 
     fun dp2px(dpValue: Int): Float {
