@@ -69,6 +69,7 @@ OJBK！So easy！
 感谢 [ChenTianSaber](https://github.com/ChenTianSaber)  的开源库 [SlideBack](https://github.com/ChenTianSaber/SlideBack) （[掘金](https://juejin.im/post/5b7a837cf265da432f653617)）提供的思路与源码
 
 ### 更新
+* 1.1.2 - 修改 SlideBackIconView 的 alpha 设置不会出现负数 [issues#16](https://github.com/ParfoisMeng/SlideBack/issues/16)
 * 1.1.1 - 修改触摸监听中触点坐标获取方法 `event.getRawX() -> event.getX()` [issues#12](https://github.com/ParfoisMeng/SlideBack/issues/12)
 * 1.1.0 - 改动较大，请酌情考虑是否升级
     * Migrate to AndroidX 且全部改用 Kotlin 语言

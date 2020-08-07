@@ -8,6 +8,7 @@ import android.graphics.Path
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import kotlin.math.max
 
 /**
  * author : ParfoisMeng
@@ -84,7 +85,7 @@ class SlideBackIconView constructor(context: Context?, attrs: AttributeSet? = nu
         canvas.drawPath(arrowPath, arrowPaint)
 
         // 最多0.8透明度
-        alpha = currentSlideLength / viewMaxLength - 0.2f
+        alpha = max(currentSlideLength / viewMaxLength - 0.2f, 0f)
     }
 
     /**
